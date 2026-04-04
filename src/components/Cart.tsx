@@ -24,7 +24,7 @@ const nigerianStates: Record<string, string[]> = {
   'Enugu': ['Enugu', 'Nsukka', 'Awgu', 'Udi', 'Oji River', 'Ezeagu', 'Igbo-Eze-North', 'Igbo-Eze-South', 'Isi-Uzo', 'Aninri'],
   'FCT Abuja': ['Gwagwalada', 'Kuje', 'Abaji', 'Bwari', 'Kwali', 'Municipal Area Council', 'AMAC'],
   'Gombe': ['Gombe', 'Funakaye', 'Yamaltu-Deba', 'Balanga', 'Billiri', 'Kaltungo', 'Shongom', 'Dukku', 'Nafada', 'Kwami'],
-  'Imo': ['Owerri', 'Orlu', 'Okigwe', 'Mbaitoli', 'Nwangele', 'Kemer", "Isu', 'Njaba', 'Onuimo', 'Ihite-Uboma'],
+  'Imo': ['Owerri', 'Orlu', 'Okigwe', 'Mbaitoli', 'Nwangele', 'Kemer', 'Isu', 'Njaba', 'Onuimo', 'Ihite-Uboma'],
   'Jigawa': ['Dutse', 'Hadejia', 'Gumel', 'Kazaure', 'Birnin-Kudu', 'Gwaram', 'Birniwa', 'Guri', 'Kiyawa', 'Ringim'],
   'Kaduna': ['Kaduna', 'Zaria', 'Kafanchan', 'Kakuri', 'Sabon-Gari', 'Kagarko', 'Chikun', 'Giwa', 'Igabi', 'Jaba'],
   'Kano': ['Kano', 'Wudil', 'Rano', 'Bunkure', 'Kibiya', 'Tofa', 'Minjibir', 'Ungogo', 'Nassarawa', 'Dala'],
@@ -74,10 +74,10 @@ export default function Cart() {
     const numericValue = value.replace(/\D/g, '').slice(0, 11);
     setOrderDetails({ ...orderDetails, phone: numericValue });
     
-    if (numericValue.length > 0 && numericValue.length < 11) {
-      setPhoneError('Phone number must be 11 digits');
-    } else if (numericValue.length === 11 && !numericValue.startsWith('0')) {
+    if (numericValue.length > 0 && !numericValue.startsWith('0')) {
       setPhoneError('Phone must start with 0');
+    } else if (numericValue.length > 0 && numericValue.length < 11) {
+      setPhoneError('Phone number must be 11 digits');
     } else {
       setPhoneError('');
     }
@@ -107,7 +107,7 @@ export default function Cart() {
       toast.error('Please enter your name');
       return;
     }
-    if (!orderDetails.email.includes('@') || !orderDetails.email.includes('.')) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(orderDetails.email)) {
       toast.error('Please enter a valid email');
       return;
     }

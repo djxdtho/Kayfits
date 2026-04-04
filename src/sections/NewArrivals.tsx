@@ -177,7 +177,7 @@ export default function NewArrivals() {
                   {/* Price tag */}
                   <div className="absolute bottom-4 left-4 right-4 glass rounded-xl p-3">
                     <div className="text-white/70 text-xs">Dragon Emblem Jersey</div>
-                    <div className="text-white font-bold text-lg">$120.00</div>
+                    <div className="text-white font-bold text-lg">₦12,000</div>
                   </div>
                 </div>
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MessageCircle, Mail, MapPin, Clock, Instagram, Send, ChevronDown } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Clock, Instagram, Send, ChevronDown, ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -266,13 +266,5 @@ export default function Contact() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ArrowRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-    </svg>
   );
 }
