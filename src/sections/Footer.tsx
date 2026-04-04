@@ -16,6 +16,7 @@ import {
   MapPin,
   Mail
 } from 'lucide-react';
+import { useCartStore } from '@/store/cartStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,6 +57,7 @@ export default function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
+  const { isOpen: isCartOpen } = useCartStore();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -102,6 +104,7 @@ export default function Footer() {
   return (
     <>
       {/* Floating WhatsApp Button */}
+      {!isCartOpen && (
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         {isWhatsAppOpen && (
           <div className="bg-white rounded-2xl shadow-2xl p-4 w-72 animate-in slide-in-from-bottom-5 fade-in duration-300">
@@ -147,6 +150,7 @@ export default function Footer() {
           )}
         </button>
       </div>
+      )}
 
       <footer ref={footerRef} className="bg-[#1a1a1a]">
         {/* Features bar */}
