@@ -120,7 +120,7 @@ export default function AllProducts() {
     <section
       ref={sectionRef}
       id="all-products"
-      className="py-24 lg:py-32 bg-[#1a1a1a]"
+      className="py-24 lg:py-32 bg-[#1a1a1a] relative z-10"
     >
       <div className="section-padding">
         {/* Header */}
@@ -135,14 +135,14 @@ export default function AllProducts() {
           {/* Search and Filter */}
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1 max-w-md z-20">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#ff6b35] transition-colors duration-300"
+                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#ff6b35] focus:ring-2 focus:ring-[#ff6b35]/20 transition-colors duration-300"
               />
             </div>
 
