@@ -200,9 +200,9 @@ export default function Cart() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50" onClick={() => handleOpenChange(false)} />
+      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 animate-in fade-in duration-300" onClick={() => handleOpenChange(false)} />
       
-      <div className="fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl">
+      <div className="fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300 ease-out">
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#1a1a1a]">
           <div className="flex items-center gap-3">
             {checkoutStep !== 'cart' && (
