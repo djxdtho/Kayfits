@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Plus, Minus, ShoppingBag, ArrowRight, X, Check, MapPin, CreditCard, Package, ChevronDown, Loader2 } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { toast } from 'sonner';
@@ -69,12 +69,14 @@ export default function Cart() {
   });
   const [phoneError, setPhoneError] = useState('');
   const [isClosing, setIsClosing] = useState(false);
-  const [isAnimatingIn, setIsAnimatingIn] = useState(false);
+  const prevIsOpenRef = useRef(isOpen);
 
   useEffect(() => {
-    if (isOpen && !isAnimatingIn) {
-      setIsAnimatingIn(true);
+    if (isOpen && !prevIsOpenRef.current) {
+      setIsClosing(false);
     }
+    prevIsOpenRef.current = isOpen;
+    
     if (isClosing) {
       const timer = setTimeout(() => {
         setIsClosing(false);
@@ -82,7 +84,7 @@ export default function Cart() {
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, isClosing, isAnimatingIn]);
+  }, [isOpen, isClosing]);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
@@ -223,7 +225,7 @@ export default function Cart() {
       />
       
       <div 
-        className={`fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : isAnimatingIn ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#1a1a1a]">
           <div className="flex items-center gap-3">
