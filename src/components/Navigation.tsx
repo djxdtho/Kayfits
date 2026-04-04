@@ -219,7 +219,7 @@ export default function Navigation() {
 
       {/* Search Dialog */}
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-        <DialogContent className="bg-[#1a1a1a] border-white/10 p-0 max-w-lg w-[95%] max-h-[80vh] overflow-hidden">
+        <DialogContent className="bg-[#1a1a1a] border-white/10 p-0 max-w-lg w-[95%] max-h-[80vh] overflow-hidden [&+div]:bg-black/50">
           <div className="p-4 border-b border-white/10">
             <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3">
               <Search className="w-5 h-5 text-white/40 flex-shrink-0" />
