@@ -183,15 +183,9 @@ export default function Navigation() {
                       <Menu className="w-6 h-6" />
                     </button>
                   </SheetTrigger>
-                  <SheetContent side="right" className="w-[85%] max-w-[320px] bg-[#1a1a1a] border-l border-white/10 p-0">
-                    <div className="flex flex-col h-full">
-                      <div className="flex items-center justify-between p-6 border-b border-white/10">
-                        <span className="font-display text-xl font-bold text-white">Menu</span>
-                        <button onClick={() => document.body.click()} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-                          <X className="w-5 h-5 text-white/60" />
-                        </button>
-                      </div>
-                      <div className="flex-1 overflow-y-auto p-6">
+                  <SheetContent side="right" className="w-[85%] max-w-[320px] bg-[#1a1a1a] border-l border-white/10 p-0 [&>button]:text-white">
+                    <div className="flex flex-col h-full pt-16">
+                      <div className="flex-1 overflow-y-auto px-6">
                         <div className="space-y-2">
                           {navLinks.map((link, index) => (
                             <button
