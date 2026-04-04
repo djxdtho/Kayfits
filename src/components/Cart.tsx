@@ -69,8 +69,12 @@ export default function Cart() {
   });
   const [phoneError, setPhoneError] = useState('');
   const [isClosing, setIsClosing] = useState(false);
+  const [isAnimatingIn, setIsAnimatingIn] = useState(false);
 
   useEffect(() => {
+    if (isOpen && !isAnimatingIn) {
+      setIsAnimatingIn(true);
+    }
     if (isClosing) {
       const timer = setTimeout(() => {
         setIsClosing(false);
@@ -78,7 +82,7 @@ export default function Cart() {
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [isClosing]);
+  }, [isOpen, isClosing, isAnimatingIn]);
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
@@ -219,7 +223,7 @@ export default function Cart() {
       />
       
       <div 
-        className={`fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
+        className={`fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : isAnimatingIn ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#1a1a1a]">
           <div className="flex items-center gap-3">
