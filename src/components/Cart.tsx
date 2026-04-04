@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Minus, ShoppingBag, ArrowRight, X, Check, MapPin, CreditCard, Package, ChevronDown, Loader2 } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { toast } from 'sonner';
@@ -68,6 +68,23 @@ export default function Cart() {
     state: '',
   });
   const [phoneError, setPhoneError] = useState('');
+  const [isClosing, setIsClosing] = useState(false);
+
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        setIsClosing(false);
+        setCartOpen(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing]);
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setIsClosing(true);
+    }
+  };
 
   const total = getTotalPrice();
   const shipping = 2500;
@@ -90,13 +107,6 @@ export default function Cart() {
 
   const handleStateChange = (state: string) => {
     setOrderDetails({ ...orderDetails, state, city: '' });
-  };
-
-  const handleOpenChange = (open: boolean) => {
-    if (!open) {
-      setCartOpen(false);
-      setCheckoutStep('cart');
-    }
   };
 
   const handleCheckout = () => {
@@ -184,11 +194,14 @@ export default function Cart() {
   };
 
   const resetCheckout = () => {
-    clearCart();
-    setCartOpen(false);
-    setCheckoutStep('cart');
-    setOrderDetails({ name: '', email: '', phone: '', address: '', city: '', state: '' });
-    setPaymentMethod('transfer');
+    setIsClosing(true);
+    setTimeout(() => {
+      clearCart();
+      setCheckoutStep('cart');
+      setOrderDetails({ name: '', email: '', phone: '', address: '', city: '', state: '' });
+      setPaymentMethod('transfer');
+      setIsClosing(false);
+    }, 300);
   };
 
   const handleBack = () => {
@@ -196,13 +209,18 @@ export default function Cart() {
     if (checkoutStep === 'payment') setCheckoutStep('details');
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !isClosing) return null;
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 animate-in fade-in duration-300" onClick={() => handleOpenChange(false)} />
+      <div 
+        className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`} 
+        onClick={() => handleOpenChange(false)} 
+      />
       
-      <div className="fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl animate-in slide-in-from-right duration-300 ease-out">
+      <div 
+        className={`fixed inset-y-0 right-0 w-full sm:w-[440px] bg-[#111] border-l border-white/10 z-50 flex flex-col shadow-2xl transition-transform duration-300 ease-out ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
+      >
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#1a1a1a]">
           <div className="flex items-center gap-3">
             {checkoutStep !== 'cart' && (
