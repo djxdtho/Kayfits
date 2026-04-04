@@ -145,19 +145,17 @@ export default function Navigation() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
-                    className="p-2 text-white/80 hover:text-white transition-colors duration-300"
-                  >
-                    <Search className="w-5 h-5" />
-                  </button>
-                </div>
+              <div className="flex items-center gap-3 sm:gap-4">
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
 
                 <button 
                   onClick={() => setIsWishlistOpen(true)}
-                  className="relative hidden sm:flex p-2 text-white/80 hover:text-[#ff6b35] transition-colors duration-300"
+                  className="relative p-2 text-white/80 hover:text-[#ff6b35] transition-colors duration-300"
                 >
                   <Heart className="w-5 h-5" />
                   {wishlistCount > 0 && (
@@ -181,21 +179,41 @@ export default function Navigation() {
 
                 <Sheet>
                   <SheetTrigger asChild>
-                    <button className="md:hidden p-2 text-white/80 hover:text-white transition-colors duration-300">
+                    <button className="md:hidden p-2 text-white/80 hover:text-white transition-colors duration-300 ml-1">
                       <Menu className="w-6 h-6" />
                     </button>
                   </SheetTrigger>
-                  <SheetContent side="right" className="w-80 bg-[#1a1a1a] border-l border-white/10">
-                    <div className="flex flex-col gap-8 mt-8">
-                      {navLinks.map((link) => (
-                        <button
-                          key={link.name}
-                          onClick={() => scrollToSection(link.href)}
-                          className="text-2xl font-display text-white/80 hover:text-white text-left transition-colors duration-300"
-                        >
-                          {link.name}
+                  <SheetContent side="right" className="w-[85%] max-w-[320px] bg-[#1a1a1a] border-l border-white/10 p-0">
+                    <div className="flex flex-col h-full">
+                      <div className="flex items-center justify-between p-6 border-b border-white/10">
+                        <span className="font-display text-xl font-bold text-white">Menu</span>
+                        <button onClick={() => document.body.click()} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                          <X className="w-5 h-5 text-white/60" />
                         </button>
-                      ))}
+                      </div>
+                      <div className="flex-1 overflow-y-auto p-6">
+                        <div className="space-y-2">
+                          {navLinks.map((link, index) => (
+                            <button
+                              key={link.name}
+                              onClick={() => scrollToSection(link.href)}
+                              className="w-full flex items-center justify-between p-4 rounded-xl text-white/80 hover:text-white hover:bg-white/5 text-left transition-all duration-200 group"
+                              style={{ animationDelay: `${index * 50}ms` }}
+                            >
+                              <span className="text-lg font-medium">{link.name}</span>
+                              <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-[#ff6b35] group-hover:translate-x-1 transition-all duration-200" />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="p-6 border-t border-white/10">
+                        <div className="flex items-center gap-4 text-white/40 text-sm">
+                          <span>Need help?</span>
+                          <a href="https://wa.me/2347025451230" target="_blank" rel="noopener noreferrer" className="text-[#ff6b35] hover:underline">
+                            Contact Us
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </SheetContent>
                 </Sheet>
