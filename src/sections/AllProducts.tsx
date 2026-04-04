@@ -120,7 +120,7 @@ export default function AllProducts() {
     <section
       ref={sectionRef}
       id="all-products"
-      className="py-24 lg:py-32 bg-[#1a1a1a] relative z-10"
+      className="py-24 lg:py-32 bg-[#1a1a1a] relative"
     >
       <div className="section-padding">
         {/* Header */}
@@ -135,7 +135,7 @@ export default function AllProducts() {
           {/* Search and Filter */}
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Search */}
-            <div className="relative flex-1 max-w-md z-20">
+            <div className="relative flex-1 max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
               <input
                 type="text"
