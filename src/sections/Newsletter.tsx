@@ -192,7 +192,7 @@ export default function Newsletter() {
               {/* Main product image */}
               <div className="relative w-72 md:w-96 rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/product_02.jpg"
+                  src="images/product_02.jpg"
                   alt="Newsletter"
                   className="w-full aspect-[4/5] object-cover"
                 />
@@ -224,7 +224,7 @@ export default function Newsletter() {
                 style={{ animationDelay: '1s' }}
               >
                 <img
-                  src="/images/product_04.jpg"
+                  src="images/product_04.jpg"
                   alt="Secondary"
                   className="w-full h-full object-cover"
                 />

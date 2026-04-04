@@ -146,7 +146,7 @@ export default function Hero() {
               {/* Main image */}
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-[#2a2a2a]">
                 <img
-                  src="/images/hero_model_1.jpg"
+                  src="images/hero_model_1.jpg"
                   alt="Kay-fits Fashion"
                   className="w-full max-w-md lg:max-w-lg object-cover"
                   loading="eager"
@@ -175,7 +175,7 @@ export default function Hero() {
                 style={{ animationDelay: '1s' }}
               >
                 <img
-                  src="/images/hero_model_2.jpg"
+                  src="images/hero_model_2.jpg"
                   alt="Secondary"
                   className="w-full h-full object-cover"
                   loading="eager"

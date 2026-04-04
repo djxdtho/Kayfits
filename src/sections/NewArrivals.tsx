@@ -168,7 +168,7 @@ export default function NewArrivals() {
                 {/* Main product image */}
                 <div className="relative w-64 md:w-80 rounded-2xl overflow-hidden shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500">
                   <img
-                    src="/images/product_20.jpg"
+                    src="images/product_20.jpg"
                     alt="New Arrival"
                     className="w-full aspect-[4/5] object-cover"
                   />
@@ -187,7 +187,7 @@ export default function NewArrivals() {
                   style={{ animationDelay: '0.5s' }}
                 >
                   <img
-                    src="/images/product_23.jpg"
+                    src="images/product_23.jpg"
                     alt="Secondary"
                     className="w-full aspect-square object-cover"
                   />
