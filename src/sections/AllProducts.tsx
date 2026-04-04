@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
 import { ShoppingBag, Heart, Search } from 'lucide-react';
 import { products } from '@/data/products';
 import { useCartStore } from '@/store/cartStore';
@@ -12,8 +10,6 @@ import {
 } from '@/components/ui/dialog';
 import type { Product } from '@/types';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const categories = [
   { id: 'all', name: 'All Products' },
   { id: 'track-pants', name: 'Track Pants' },
@@ -24,9 +20,6 @@ const categories = [
 ];
 
 export default function AllProducts() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const { addItem, setCartOpen } = useCartStore();
   const { toggleItem, isInWishlist } = useWishlistStore();
   
@@ -43,38 +36,6 @@ export default function AllProducts() {
                          product.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        titleRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power2.out',
-        }
-      );
-
-      const cards = gridRef.current?.querySelectorAll('.product-card-wrapper');
-      if (cards) {
-        gsap.fromTo(
-          cards,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out',
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [filteredProducts]);
 
   const openProductModal = (product: Product) => {
     setSelectedProduct(product);
@@ -118,13 +79,12 @@ export default function AllProducts() {
 
   return (
     <section
-      ref={sectionRef}
       id="all-products"
-      className="py-24 lg:py-32 bg-[#1a1a1a] relative"
+      className="py-24 lg:py-32 bg-[#1a1a1a]"
     >
       <div className="section-padding">
         {/* Header */}
-        <div ref={titleRef} className="mb-12">
+        <div className="mb-12">
           <span className="text-sm font-accent uppercase tracking-widest text-[#ff6b35] mb-4 block">
             Full Collection
           </span>
@@ -167,7 +127,6 @@ export default function AllProducts() {
 
         {/* Product Grid */}
         <div
-          ref={gridRef}
           className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {filteredProducts.map((product) => (
