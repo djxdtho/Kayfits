@@ -149,6 +149,7 @@ export default function Navigation() {
                 <button
                   onClick={() => setIsSearchOpen(true)}
                   className="p-2 text-white/80 hover:text-white transition-colors duration-300"
+                  aria-label="Open search"
                 >
                   <Search className="w-5 h-5" />
                 </button>
@@ -156,6 +157,7 @@ export default function Navigation() {
                 <button 
                   onClick={() => setIsWishlistOpen(true)}
                   className="relative p-2 text-white/80 hover:text-[#ff6b35] transition-colors duration-300"
+                  aria-label={`Wishlist${wishlistCount > 0 ? `, ${wishlistCount} items` : ''}`}
                 >
                   <Heart className="w-5 h-5" />
                   {wishlistCount > 0 && (
@@ -168,6 +170,7 @@ export default function Navigation() {
                 <button
                   onClick={toggleCart}
                   className="relative p-2 text-white/80 hover:text-white transition-colors duration-300 group"
+                  aria-label={`Cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}
                 >
                   <ShoppingBag className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
                   {cartCount > 0 && (
@@ -203,7 +206,7 @@ export default function Navigation() {
                       <div className="p-6 border-t border-white/10">
                         <div className="flex items-center gap-4 text-white/40 text-sm">
                           <span>Need help?</span>
-                          <a href="https://wa.me/2347025451230" target="_blank" rel="noopener noreferrer" className="text-[#ff6b35] hover:underline">
+                           <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230'}`} target="_blank" rel="noopener noreferrer" className="text-[#ff6b35] hover:underline">
                             Contact Us
                           </a>
                         </div>

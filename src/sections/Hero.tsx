@@ -147,7 +147,7 @@ export default function Hero() {
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl bg-[#2a2a2a]">
                 <img
                   src="images/hero_model_1.jpg"
-                  alt="Kay-fits Fashion"
+                  alt="Model wearing Kay-fits streetwear collection"
                   className="w-full max-w-md lg:max-w-lg object-cover"
                   loading="eager"
                   decoding="async"
@@ -176,7 +176,7 @@ export default function Hero() {
               >
                 <img
                   src="images/hero_model_2.jpg"
-                  alt="Secondary"
+                  alt="Model showcasing latest Kay-fits arrivals"
                   className="w-full h-full object-cover"
                   loading="eager"
                   decoding="async"

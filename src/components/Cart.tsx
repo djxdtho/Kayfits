@@ -4,6 +4,11 @@ import { useCartStore } from '@/store/cartStore';
 import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
 
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230';
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_s878amk';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_a4crwic';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '0RT6CTEgKh13HuZOX';
+
 type CheckoutStep = 'cart' | 'details' | 'payment' | 'success';
 type PaymentMethod = 'transfer' | 'cod';
 
@@ -154,10 +159,10 @@ export default function Cart() {
 
     try {
       await emailjs.send(
-        'service_s878amk',
-        'template_a4crwic',
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         templateParams,
-        '0RT6CTEgKh13HuZOX'
+        EMAILJS_PUBLIC_KEY
       );
       
       toast.success('Order placed! Check your email for confirmation.');
@@ -168,19 +173,22 @@ export default function Cart() {
     }
 
     const whatsappMsg = encodeURIComponent(`New Order from Kay-fits\n\nName: ${orderDetails.name}\nPhone: ${orderDetails.phone}\nAddress: ${orderDetails.address}\nCity: ${orderDetails.city}\nState: ${orderDetails.state}\n\nOrder Total: ₦${grandTotal.toLocaleString()}\nPayment: ${paymentMethod === 'transfer' ? 'Bank Transfer' : 'Cash on Delivery'}`);
-    const whatsappLink = `https://wa.me/2347025451230?text=${whatsappMsg}`;
+    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`;
     window.open(whatsappLink, '_blank');
 
     setCheckoutStep('success');
-    
-    setTimeout(() => {
-      clearCart();
-      setCartOpen(false);
-      setCheckoutStep('cart');
-      setOrderDetails({ name: '', email: '', phone: '', address: '', city: '', state: '' });
-      setPaymentMethod('transfer');
-      setIsSubmitting(false);
-    }, 3000);
+    clearCart();
+    setOrderDetails({ name: '', email: '', phone: '', address: '', city: '', state: '' });
+    setPaymentMethod('transfer');
+    setIsSubmitting(false);
+  };
+
+  const resetCheckout = () => {
+    clearCart();
+    setCartOpen(false);
+    setCheckoutStep('cart');
+    setOrderDetails({ name: '', email: '', phone: '', address: '', city: '', state: '' });
+    setPaymentMethod('transfer');
   };
 
   const handleBack = () => {
@@ -270,11 +278,19 @@ export default function Cart() {
                         <p className="text-white/40 text-xs mt-0.5">{item.selectedSize}{item.selectedColor && ` · ${item.selectedColor}`}</p>
                         <div className="flex items-center justify-between mt-2">
                           <div className="flex items-center gap-1.5 bg-white/5 rounded-lg p-1">
-                            <button onClick={() => updateQuantity(item.cartId, item.quantity - 1)} className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <button 
+                              onClick={() => updateQuantity(item.cartId, Math.max(1, item.quantity - 1))} 
+                              className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
+                              aria-label="Decrease quantity"
+                            >
                               <Minus className="w-3 h-3 text-white/60" />
                             </button>
                             <span className="text-white text-sm w-5 text-center font-medium">{item.quantity}</span>
-                            <button onClick={() => updateQuantity(item.cartId, item.quantity + 1)} className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+                            <button 
+                              onClick={() => updateQuantity(item.cartId, Math.min(10, item.quantity + 1))} 
+                              className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
+                              aria-label="Increase quantity"
+                            >
                               <Plus className="w-3 h-3 text-white/60" />
                             </button>
                           </div>
@@ -410,7 +426,13 @@ export default function Cart() {
               </div>
               <h3 className="font-display text-2xl text-white mb-3">Order Placed!</h3>
               <p className="text-white/50 text-sm mb-2">Thank you for your order</p>
-              <p className="text-white/30 text-xs">Check your email and WhatsApp for confirmation</p>
+              <p className="text-white/30 text-xs mb-6">Check your email and WhatsApp for confirmation</p>
+              <button 
+                onClick={() => resetCheckout()}
+                className="bg-[#ff6b35] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#e55a2b] transition-colors"
+              >
+                Continue Shopping
+              </button>
             </div>
           )}
         </div>

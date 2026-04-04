@@ -5,6 +5,8 @@ import { MessageCircle, Mail, MapPin, Clock, Instagram, Send, ChevronDown, Arrow
 
 gsap.registerPlugin(ScrollTrigger);
 
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230';
+
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -14,7 +16,7 @@ export default function Contact() {
       icon: MessageCircle,
       title: 'WhatsApp',
       value: '07025451230',
-      link: 'https://wa.me/2347025451230',
+      link: `https://wa.me/${WHATSAPP_NUMBER}`,
       color: 'bg-green-500',
       hoverColor: 'hover:bg-green-600',
       description: 'Fastest way to reach us',
@@ -254,7 +256,7 @@ export default function Contact() {
           <div className="contact-cta mt-12 sm:mt-16 text-center">
             <h3 className="text-white font-semibold text-lg sm:text-xl mb-3 sm:mb-4">Still have questions?</h3>
             <a
-              href="https://wa.me/2347025451230?text=Hi%2C%20I%20have%20a%20question%20about%20Kay-fits"
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20have%20a%20question%20about%20Kay-fits`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 sm:gap-3 bg-[#ff6b35] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold hover:bg-[#e55a2b] transition-all duration-300 hover:scale-105 active:scale-95 text-sm sm:text-base"

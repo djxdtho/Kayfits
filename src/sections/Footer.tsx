@@ -33,10 +33,10 @@ const footerLinks = {
     { name: 'Return Policy', href: '#returns' },
   ],
   support: [
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Size Guide', href: '#' },
-    { name: 'Track Order', href: '#' },
-    { name: 'Shipping Info', href: '#' },
+    { name: 'FAQ', href: '#contact' },
+    { name: 'Size Guide', href: '#contact' },
+    { name: 'Track Order', href: '#contact' },
+    { name: 'Shipping Info', href: '#contact' },
   ],
 };
 
@@ -91,10 +91,12 @@ export default function Footer() {
     }
   };
 
+  const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230';
+
   const whatsappOptions = [
-    { label: 'I want to place an order', icon: Send, action: () => window.open('https://wa.me/2347025451230?text=Hi%2C%20I%20want%20to%20place%20an%20order') },
-    { label: 'I have a question', icon: MessageCircle, action: () => window.open('https://wa.me/2347025451230?text=Hi%2C%20I%20have%20a%20question') },
-    { label: 'Track my order', icon: Truck, action: () => window.open('https://wa.me/2347025451230?text=Hi%2C%20I%20want%20to%20track%20my%20order') },
+    { label: 'I want to place an order', icon: Send, action: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20want%20to%20place%20an%20order`) },
+    { label: 'I have a question', icon: MessageCircle, action: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20have%20a%20question`) },
+    { label: 'Track my order', icon: Truck, action: () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20want%20to%20track%20my%20order`) },
   ];
 
   return (

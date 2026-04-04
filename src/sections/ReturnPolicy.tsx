@@ -5,6 +5,8 @@ import { Truck, RotateCcw, Shield, HeadphonesIcon, MessageCircle, CheckCircle, P
 
 gsap.registerPlugin(ScrollTrigger);
 
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230';
+
 const policies = [
   {
     icon: RotateCcw,
@@ -208,7 +210,7 @@ export default function ReturnPolicy() {
                 <p className="text-white/50 text-sm mb-3 sm:mb-0">Contact us on WhatsApp for quick assistance</p>
               </div>
               <a
-                href="https://wa.me/2347025451230?text=Hi%2C%20I%20want%20to%20request%20a%20return"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C%20I%20want%20to%20request%20a%20return`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#ff6b35] text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold hover:bg-[#e55a2b] transition-all duration-300 hover:scale-105 active:scale-95 text-sm sm:text-base whitespace-nowrap"
