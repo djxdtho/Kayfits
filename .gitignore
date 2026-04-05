@@ -9,6 +9,8 @@ docs/
 .env
 .env.local
 .env.production
+*API_KEYS*
+*api_keys*
 
 # IDE
 .vscode/
