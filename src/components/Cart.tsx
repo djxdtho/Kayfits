@@ -3,6 +3,7 @@ import { Plus, Minus, ShoppingBag, ArrowRight, X, Check, MapPin, CreditCard, Pac
 import { useCartStore } from '@/store/cartStore';
 import { toast } from 'sonner';
 import emailjs from '@emailjs/browser';
+import { saveOrder } from '@/lib/supabase';
 
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2347025451230';
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_s878amk';
@@ -174,6 +175,21 @@ export default function Cart() {
     };
 
     try {
+      // Save order to database
+      await saveOrder({
+        customer_name: orderDetails.name,
+        customer_email: orderDetails.email,
+        customer_phone: orderDetails.phone,
+        delivery_address: orderDetails.address,
+        city: orderDetails.city,
+        state: orderDetails.state,
+        items: items,
+        subtotal: total,
+        shipping: shipping,
+        total: grandTotal,
+        payment_method: paymentMethod === 'transfer' ? 'Bank Transfer' : 'Cash on Delivery',
+      });
+
       // Send email notification
       await emailjs.send(
         EMAILJS_SERVICE_ID,
